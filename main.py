@@ -30,14 +30,21 @@ def scan_networks():
     """Scan for nearby networks and return a list."""
     try:
         print("[+] Scanning for networks...")
-        result = subprocess.run(
+        # Run airodump-ng for 10 seconds to capture networks
+        subprocess.run(
             ["sudo", "airodump-ng", MONITOR_INTERFACE, "--write", "scan", "--output-format", "csv"],
-            timeout=100,
-            capture_output=True,
-            text=True
+            timeout=10,
+            check=True  # Raise an error if the command fails
         )
+        
+        # Parse the CSV output
         networks = []
-        with open("scan-01.csv", "r") as f:
+        csv_file = "scan-01.csv"
+        if not os.path.exists(csv_file):
+            print(f"[-] Error: {csv_file} not found. Check if airodump-ng ran successfully.")
+            return []
+
+        with open(csv_file, "r") as f:
             for line in f:
                 if "BSSID" in line or line.strip() == "":
                     continue
@@ -50,9 +57,15 @@ def scan_networks():
                         "PWR": parts[8].strip()
                     })
         return networks
+
+    except subprocess.TimeoutExpired:
+        print("[!] Scan timed out. Ensure your Wi-Fi adapter supports monitor mode.")
+    except subprocess.CalledProcessError as e:
+        print(f"[-] Command failed: {e}")
     except Exception as e:
-        print(f"[-] Scan failed: {e}")
-        return []
+        print(f"[-] Unexpected error: {e}")
+    return []
+
 
 
 def deauthenticate(bssid, client=None):
