@@ -55,6 +55,7 @@ Clone the repository:
 
 Bash
 git clone https://github.com/chinthajayanth/Wifi_Evil_Twin.git
+
 cd Wifi_Evil_Twin
 
 Install system dependencies:
