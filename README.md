@@ -54,8 +54,9 @@ Installation Steps
 Clone the repository:
 
 Bash
-git clone https://github.com/[Your-Username]/[Your-Repo-Name].git
-cd [Your-Repo-Name]
+git clone https://github.com/chinthajayanth/Wifi_Evil_Twin.git
+cd Wifi_Evil_Twin
+
 Install system dependencies:
 
 Bash
