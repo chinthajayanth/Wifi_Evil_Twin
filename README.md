@@ -54,6 +54,7 @@ Installation Steps
 Clone the repository:
 
 Bash
+
 git clone https://github.com/chinthajayanth/Wifi_Evil_Twin.git
 
 cd Wifi_Evil_Twin
@@ -61,12 +62,17 @@ cd Wifi_Evil_Twin
 Install system dependencies:
 
 Bash
+
 sudo apt-get update
+
 sudo apt-get install aircrack-ng hostapd dnsmasq apache2 python3-pyqt5
+
 Install Python libraries:
 
 Bash
+
 pip3 install -r requirements.txt
+
 Usage
 
 Run the tool:
@@ -89,6 +95,9 @@ Clean up: The tool attempts to clean up processes when closed. If it fails, manu
 
 Bash
 sudo service apache2 stop
+
 sudo pkill dnsmasq
+
 sudo airmon-ng stop wlan0mon
+
 sudo airmon-ng stop wlan1mon
